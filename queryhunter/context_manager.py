@@ -1,4 +1,5 @@
 import contextlib
+from typing import List, Dict
 
 from django.conf import settings
 from django.db import connection
@@ -8,7 +9,7 @@ from queryhunter.reporting import ReportingOptions, QueryHunterReporter, Printin
 
 
 class queryhunter(contextlib.ContextDecorator):
-    def __init__(self, reporting_options: ReportingOptions = None, meta_data: dict[str, str] = None):
+    def __init__(self, reporting_options: ReportingOptions = None, meta_data: Dict[str, str] = None):
         if not hasattr(settings, 'QUERYHUNTER_BASE_DIR'):
             raise ValueError('QUERYHUNTER_BASE_DIR setting is required')
 

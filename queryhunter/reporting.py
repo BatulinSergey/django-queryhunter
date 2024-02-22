@@ -1,6 +1,6 @@
 import logging
 from dataclasses import dataclass
-from typing import Optional
+from typing import Optional, List, Dict
 
 from queryhunter.queryhunter import QueryHunter
 
@@ -13,7 +13,7 @@ REPORT_TYPE_OPTIONS = ['print', 'log', 'html']
 class ReportingOptions:
     report_type: str = 'print'
     sort_by: str = 'line_no'
-    modules: Optional[list[str]] = None
+    modules: Optional[List[str]] = None
     max_sql_length: Optional[int] = None
 
     def __post_init__(self):

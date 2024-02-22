@@ -6,7 +6,7 @@ import os
 import time
 import traceback
 from dataclasses import dataclass
-from typing import TYPE_CHECKING, Optional
+from typing import TYPE_CHECKING, Optional, Dict, List
 
 from django.conf import settings
 
@@ -21,7 +21,7 @@ class Line:
     sql: str
     count: int
     duration: float
-    meta_data: Optional[dict[str, str]] = None
+    meta_data: Optional[Dict[str, str]] = None
 
     def __str__(self):
         string = (
@@ -37,7 +37,7 @@ class Line:
 @dataclass
 class Module:
     name: str
-    lines: list[Line]
+    lines: List[Line]
 
     def __str__(self):
         data = ''
@@ -52,9 +52,9 @@ class Module:
 
 
 class QueryHunter:
-    def __init__(self, reporting_options: QueryHunterReportingOptions, meta_data: dict[str, str] = None):
+    def __init__(self, reporting_options: QueryHunterReportingOptions, meta_data: Dict[str, str] = None):
         self.reporting_options = reporting_options
-        self.query_info: dict[str, Module] = {}
+        self.query_info: Dict[str, Module] = {}
         self.meta_data = meta_data
 
     def __call__(self, execute, sql, params, many, context):
